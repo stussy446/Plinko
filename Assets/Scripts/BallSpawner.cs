@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BallSpawner : MonoBehaviour
@@ -8,6 +9,21 @@ public class BallSpawner : MonoBehaviour
     [SerializeField] private float _zMousePos = 13.4f;
 
     private int _ballCount = 0;
+
+    private void OnEnable()
+    {
+        GameManager.Instance.OnNewRoundStart += ResetBallCount;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnNewRoundStart -= ResetBallCount;
+    }
+
+    private void ResetBallCount()
+    {
+        _ballCount = 0;
+    }
 
     private void Update()
     {
