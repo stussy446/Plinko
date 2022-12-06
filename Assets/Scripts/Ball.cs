@@ -6,6 +6,11 @@ public class Ball : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("BOOM!");
+        Pin hitPin = collision.gameObject.GetComponent<Pin>();
+
+        if (hitPin != null)
+        {
+            GameManager.Instance.AddPoints(hitPin.PinValue);
+        }
     }
 }
